@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Predict Skin Disease | Mediskin AI</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+   body {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(245, 255, 253, 0.55), rgba(245, 255, 253, 0.55)),
+        url("{{ url_for('static', filename='1.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+
+
+    /* NAVBAR */
+    .navbar {
+      background: #00695C;
+      color: white;
+      padding: 16px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .navbar h2 span {
+      color: #80CBC4;
+    }
+
+    .navbar a {
+      margin-left: 25px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .navbar a:hover {
+      color: #80CBC4;
+    }
+
+    /* PAGE WRAPPER */
+   .dashboard {
+  padding: 50px 60px;
+  display: flex;
+  justify-content: center;
+
+}
+.dashboard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(38, 166, 154, 0.12),
+    transparent 60%
+  );
+  z-index: -1;
+}
+
+
+
+    /* CARD */
+    .hero-card {
+      background: white;
+      width: 900px;
+      padding: 45px;
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    }
+
+    .hero-card h1 {
+      color: #00695C;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+
+    .hero-text {
+      color: #555;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* FORM */
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input[type="file"],
+    select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      background: #fff;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #00897B;
+      box-shadow: 0 0 6px rgba(0,137,123,0.35);
+    }
+
+    /* BUTTON */
+    .primary-btn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 15px;
+      background: linear-gradient(135deg, #26A69A, #00897B);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,137,123,0.35);
+      transition: 0.3s;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(0,137,123,0.45);
+    }
+
+    /* INFO */
+    .note-text {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+    }
+
+    .tips {
+      margin-top: 35px;
+      padding: 20px;
+      background: #E0F2F1;
+      border-left: 6px solid #26A69A;
+      border-radius: 12px;
+    }
+
+    .tips h4 {
+      margin-bottom: 10px;
+      color: #00695C;
+    }
+
+    .tips ul {
+      padding-left: 18px;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .tips li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>Medi<span>skin</span> AI</h2>
+  <div>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/logout">Logout</a>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="dashboard">
+
+  <div class="hero-card">
+
+    <h1>Skin Disease Prediction</h1>
+    <p class="hero-text">
+      Upload a clear image of the affected skin area and select your city.
+      Our AI model will analyze the image and provide a prediction along with
+      nearby hospital recommendations.
+    </p>
+
+    <form method="POST" enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label>Upload Skin Image</label>
+        <input type="file" name="image" accept=".jpg,.jpeg,.png" required>
+      </div>
+
+      <div class="form-group">
+        <label>Select Location</label>
+        <select name="location" required>
+          <option value="">Choose city</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="Bangalore">Bangalore</option>
+          <option value="Chennai">Chennai</option>
+          <option value="Hyderabad">Hyderabad</option>
+          <option value="Pune">Pune</option>
+          <option value="Kolkata">Kolkata</option>
+        </select>
+      </div>
+
+      <button type="submit" class="primary-btn">
+        Analyze Image with AI
+      </button>
+
+    </form>
+
+    <div class="tips">
+      <h4>Tips for Best Results</h4>
+      <ul>
+        <li>Ensure the image is clear and well-lit</li>
+        <li>Avoid blurry or distant images</li>
+        <li>Capture only the affected skin area</li>
+        <li>Do not apply filters or edits</li>
+      </ul>
+    </div>
+
+    <p class="note-text">
+      ⚠️ This prediction is AI-generated and intended for educational assistance only.
+      Please consult a certified dermatologist for medical advice.
+    </p>
+
+  </div>
+
+</div>
+
+</body>
+</html>

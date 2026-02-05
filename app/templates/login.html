@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Mediskin AI</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(245, 255, 253, 0.55), rgba(245, 255, 253, 0.55)),
+        url("{{ url_for('static', filename='1.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #00695C;
+      color: white;
+      padding: 16px 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .navbar h1 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .navbar span {
+      color: #80CBC4;
+    }
+
+    .nav-links a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #80CBC4;
+    }
+
+    /* AUTH CONTAINER */
+    .auth-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 80px);
+      padding: 30px;
+    }
+
+    .auth-card {
+      width: 950px;
+      height: 520px;
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 18px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    /* LEFT FORM */
+    .auth-form {
+      flex: 1;
+      padding: 60px 50px;
+    }
+
+    .auth-form h2 {
+      font-size: 32px;
+      color: #00695C;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .auth-form input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 18px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .auth-form input:focus {
+      outline: none;
+      border-color: #00897B;
+      box-shadow: 0 0 6px rgba(0,137,123,0.4);
+    }
+
+    .auth-form button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #26A69A, #00897B);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,137,123,0.35);
+      transition: 0.3s;
+    }
+
+    .auth-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0,137,123,0.45);
+    }
+
+    .switch {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .switch a {
+      color: #00897B;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* RIGHT IMAGE */
+    .auth-image {
+      flex: 1;
+      background: linear-gradient(135deg, #00897B, #26A69A);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .auth-image img {
+      width: 80%;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 900px) {
+      .auth-card {
+        flex-direction: column;
+        height: auto;
+      }
+      .auth-image {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h1>Medi<span>skin</span> AI</h1>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  </div>
+</div>
+
+<!-- LOGIN SECTION -->
+<div class="auth-container">
+  <div class="auth-card">
+
+    <div class="auth-form">
+      <h2>Welcome Back</h2>
+      <p class="subtitle">
+        AI-powered skin disease detection & medical assistance platform
+      </p>
+
+      <form method="POST">
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login to Dashboard</button>
+      </form>
+
+      <p class="switch">
+        Don’t have an account?
+        <a href="/register">Create one</a>
+      </p>
+    </div>
+
+    <!-- LOGO IMAGE -->
+    <div class="auth-image">
+      <img src="{{ url_for('static', filename='2.jpg') }}" alt="Mediskin AI Logo">
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

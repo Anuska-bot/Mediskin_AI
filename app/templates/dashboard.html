@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | Mediskin AI</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+   body {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(245, 255, 253, 0.55), rgba(245, 255, 253, 0.55)),
+        url("{{ url_for('static', filename='1.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+
+    /* NAVBAR */
+    .navbar {
+      background: #00695C;
+      color: white;
+      padding: 16px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .navbar h2 span {
+      color: #80CBC4;
+    }
+
+    .navbar a {
+      margin-left: 25px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .navbar a:hover {
+      color: #80CBC4;
+    }
+    /* DASHBOARD */
+   .dashboard {
+  padding: 50px 60px;
+  
+  
+}
+
+.dashboard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(38, 166, 154, 0.12),
+    transparent 60%
+  );
+  z-index: -1;
+}
+
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #00897B, #26A69A);
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      opacity: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 26px;
+      background: white;
+      color: #00695C;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border-left: 6px solid #00897B;
+    }
+
+    .stat-card h3 {
+      color: #00695C;
+      margin-bottom: 8px;
+    }
+
+    .stat-card p {
+      color: #555;
+      font-size: 14px;
+    }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      color: #00695C;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, #E0F2F1, #F5FFFD);
+      border-left: 6px solid #26A69A;
+    }
+
+    /* FOOTER NOTE */
+    .note {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>Medi<span>skin</span> AI</h2>
+  <div>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/predict">Predict</a>
+    <a href="/logout">Logout</a>
+  </div>
+</div>
+
+<!-- DASHBOARD CONTENT -->
+<div class="dashboard">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Welcome, {{ username }} 👋</h1>
+    <p>
+      AI-powered platform for early skin disease screening, hospital guidance,
+      and medical awareness.
+    </p>
+    <a href="/predict" class="btn-primary">Start Skin Prediction</a>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-card">
+      <h3>AI Model Accuracy</h3>
+      <p>Trained on dermatology datasets with high confidence predictions</p>
+    </div>
+    <div class="stat-card">
+      <h3>Supported Conditions</h3>
+      <p>Melanoma, eczema, psoriasis, acne & more</p>
+    </div>
+    <div class="stat-card">
+      <h3>Hospital Network</h3>
+      <p>Verified hospitals & dermatology specialists across India</p>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="card highlight">
+      <h3>AI-Based Diagnosis</h3>
+      <p>
+        Upload an image of the affected skin area and receive an AI-generated
+        prediction based on deep learning models.
+      </p>
+    </div>
+
+    <div class="card highlight">
+      <h3>Hospital & Consultant Guidance</h3>
+      <p>
+        Get recommendations for nearby hospitals and dermatologists
+        for further clinical evaluation.
+      </p>
+    </div>
+
+    <div class="card highlight">
+      <h3>Medical Disclaimer</h3>
+      <p>
+        Mediskin AI is designed for educational and assistance purposes only.
+        Always consult a certified medical professional for diagnosis and treatment.
+      </p>
+    </div>
+  </section>
+
+  <p class="note">
+    © 2026 Mediskin AI • AI-assisted healthcare platform
+  </p>
+
+</div>
+
+</body>
+</html>

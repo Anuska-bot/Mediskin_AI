@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Result | Mediskin AI</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+ body {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(245, 255, 253, 0.55), rgba(245, 255, 253, 0.55)),
+        url("{{ url_for('static', filename='1.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+
+    /* NAVBAR */
+    .navbar {
+      background: #00695C;
+      color: white;
+      padding: 16px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .navbar h2 span {
+      color: #80CBC4;
+    }
+
+    .navbar a {
+      margin-left: 25px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .navbar a:hover {
+      color: #80CBC4;
+    }
+
+    /* PAGE */
+    .dashboard {
+  padding: 50px 60px;
+ 
+}
+.dashboard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(38, 166, 154, 0.12),
+    transparent 60%
+  );
+  z-index: -1;
+}
+
+
+    /* RESULT CARD */
+    .result-card {
+      background: white;
+      padding: 40px;
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+      margin-bottom: 40px;
+    }
+
+    .result-card h1 {
+      color: #00695C;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+
+    .hero-text {
+      color: #555;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .result-image {
+      display: block;
+      max-width: 320px;
+      width: 100%;
+      margin: 20px auto;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .result-details {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .result-details p {
+      background: #E0F2F1;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 16px;
+      border-left: 6px solid #26A69A;
+    }
+
+    /* GRID */
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .info-card {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    .info-card h3 {
+      color: #00695C;
+      margin-bottom: 15px;
+    }
+
+    /* HOSPITALS */
+    .hospital-card {
+      background: #F5FFFD;
+      border: 1px solid #B2DFDB;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .hospital-card strong {
+      display: block;
+      color: #00695C;
+      margin-bottom: 6px;
+    }
+
+    .hospital-card span {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .hospital-card a {
+      display: inline-block;
+      margin-top: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: #00897B;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, #E0F2F1, #F5FFFD);
+      border-left: 6px solid #26A69A;
+    }
+
+    /* FOOTER NOTE */
+    .footer-note {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>Medi<span>skin</span> AI</h2>
+  <div>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/predict">Predict Again</a>
+    <a href="/logout">Logout</a>
+  </div>
+</div>
+
+<div class="dashboard">
+
+  <!-- RESULT -->
+  <div class="result-card">
+    <h1>Prediction Result</h1>
+    <p class="hero-text">
+      Based on the uploaded skin image, our AI model has analyzed the condition
+      and generated the following result.
+    </p>
+
+    {% if image %}
+      <img
+        src="{{ url_for('static', filename='uploads/' ~ image) }}"
+        alt="Uploaded Skin Image"
+        class="result-image"
+      >
+    {% endif %}
+
+    <div class="result-details">
+      <p><strong>Predicted Condition:</strong><br>{{ disease }}</p>
+      <p><strong>Confidence Score:</strong><br>{{ confidence }}%</p>
+    </div>
+  </div>
+
+  <!-- INFO GRID -->
+  <div class="result-grid">
+
+    <!-- HOSPITALS -->
+    <div class="info-card">
+      <h3>Recommended Hospitals & Consultants</h3>
+
+      {% if hospitals %}
+        {% for h in hospitals %}
+          <div class="hospital-card">
+            <strong>{{ h.name }}</strong>
+            <span>📞 {{ h.phone }}</span><br>
+            <a href="tel:{{ h.phone }}">Call Hospital</a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No hospital data available for this location.</p>
+      {% endif %}
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="info-card highlight">
+      <h3>Medical Disclaimer</h3>
+      <p>
+        This AI-generated prediction is provided for educational and assistance
+        purposes only. It should not be considered a substitute for professional
+        medical diagnosis or treatment. Always consult a certified dermatologist
+        or healthcare provider for medical advice.
+      </p>
+    </div>
+
+  </div>
+
+  <p class="footer-note">
+    © 2026 Mediskin AI • AI-assisted healthcare decision support system
+  </p>
+
+</div>
+
+</body>
+</html>
