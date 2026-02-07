@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 tensorflow
 numpy
 pandas
@@ -8,4 +9,16 @@ Pillow
 tqdm
 scikit-learn
 seaborn
+=======
+tensorflow
+numpy
+pandas
+matplotlib
+opencv-python
+scikit-learn
+Pillow
+tqdm
+scikit-learn
+seaborn
+>>>>>>> 3eac586c3597780025de609f5bc770209b7a2d97
 scipy
