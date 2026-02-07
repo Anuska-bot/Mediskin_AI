@@ -15,7 +15,7 @@ Objectives--
 5.Save and reuse the trained model for inference and deployment
 
 Dataset Details
-Source: Kaggle (Skin Disease Image Dataset)
+Source:  https://drive.google.com/drive/folders/1BADFBR8cJ_7650pICWDU30LBfb1a9h4z?usp=sharing
 Classes: Multiple skin conditions such as Acne, Eczema, Melanoma, Psoriasis, Normal, etc.
 Image Format: JPG / PNG
 Image Size: Resized to 224 × 224
